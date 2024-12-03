@@ -1,36 +1,62 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Initialize the scripture
-        Reference reference = new Reference("Exodus", 20, 8, 9);
-        string scriptureText =
-            "Remember the sabbath day, to keep it holy. Six days shalt thou labour, and do all thy work.";
-        Scripture scripture = new Scripture(reference, scriptureText);
+        string _filePath = "Scripture.txt";
 
-        // Main program loop
-        while (!scripture.AllWordsHidden())
+        if (File.Exists(_filePath))
         {
-            Console.Clear();
-            Console.WriteLine(scripture.GetRenderedText());
-            Console.WriteLine("\nPress Enter to hide more words or type 'quit' to exit.");
+            string[] _lines = File.ReadAllLines(_filePath);
 
-            string userInput = Console.ReadLine();
-            if (userInput.ToLower() == "quit")
+            if (_lines.Length >= 2)
             {
-                break;
+                string _referenceLine = _lines[0];
+                string _textLine = string.Join(" ", _lines, 1, _lines.Length - 1);
+
+                Reference _reference = new Reference(_referenceLine);
+                Scripture _scripture = new Scripture(_reference, _textLine);
+
+                // Main loop
+                while (true)
+                {
+                    _scripture.DisplayScripture();
+                    Console.WriteLine(
+                        "\nPress Enter to continue or type 'quit' to exit the program:"
+                    );
+
+                    string _userPrompt = Console.ReadLine();
+
+                    if (_userPrompt?.ToLower() == "quit")
+                    {
+                        break;
+                    }
+
+                    if (string.IsNullOrEmpty(_userPrompt))
+                    {
+                        _scripture.HideRandomWord();
+                    }
+
+                    // Check if all words have been hidden
+                    if (_scripture.AllWordsHidden())
+                    {
+                        break;
+                    }
+                }
             }
-
-            scripture.HideRandomWords();
+            else
+            {
+                Console.WriteLine(
+                    "Invalid file format. Ensure the file contains at least a reference and a scripture text."
+                );
+            }
         }
-
-        // Final display
-        Console.Clear();
-        Console.WriteLine(scripture.GetRenderedText());
-        Console.WriteLine("\nAll words have been hidden. Program ending.");
+        else
+        {
+            Console.WriteLine("The file does not exist.");
+        }
     }
 }
