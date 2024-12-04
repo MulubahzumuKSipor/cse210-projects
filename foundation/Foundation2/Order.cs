@@ -14,7 +14,7 @@ class Order
         Products.Add(product);
     }
 
-    public double CalculateTotalCost()
+    public double TotalCost()
     {
         double total = 0;
 
@@ -23,7 +23,7 @@ class Order
             total += product.TotalCost();
         }
 
-        double shippingCost = Customer.LivesInUSA() ? 5 : 35;
+        double shippingCost = Customer.LivesIn() ? 5 : 35;
         return total + shippingCost;
     }
 

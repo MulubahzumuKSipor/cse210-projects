@@ -5,20 +5,21 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Create addresses
-        Address address1 = new Address("123 Elm St", "Springfield", "IL", "USA");
-        Address address2 = new Address("456 Maple Ave", "Toronto", "ON", "Canada");
+        Address address1 = new Address(
+            "Plot 23, Independence Avenue",
+            "Accra",
+            "Greater Accra",
+            "Ghana"
+        );
+        Address address2 = new Address("15 Kumasi Road", "Kumasi", "Ashanti Region", "Ghana");
 
-        // Create customers
-        Customer customer1 = new Customer("John Doe", address1);
-        Customer customer2 = new Customer("Jane Smith", address2);
+        Customer customer1 = new Customer("Kwame Mensah", address1);
+        Customer customer2 = new Customer("Ama Asante", address2);
 
-        // Create products
-        Product product1 = new Product("Widget", "W123", 10.0, 3);
-        Product product2 = new Product("Gadget", "G456", 15.0, 2);
-        Product product3 = new Product("Doohickey", "D789", 7.5, 4);
+        Product product1 = new Product("Toyota Hilux", "TH123", 25000.0, 3);
+        Product product2 = new Product("Nissan Patrol", "NP456", 30000.0, 2);
+        Product product3 = new Product("Hyundai Accent", "HA789", 15000.0, 4);
 
-        // Create orders
         Order order1 = new Order(customer1);
         order1.AddProduct(product1);
         order1.AddProduct(product2);
@@ -27,17 +28,16 @@ class Program
         order2.AddProduct(product2);
         order2.AddProduct(product3);
 
-        // Display order details
         Console.WriteLine("Order 1 Packing Label:");
         Console.WriteLine(order1.GetPackingLabel());
         Console.WriteLine("\nOrder 1 Shipping Label:");
         Console.WriteLine(order1.GetShippingLabel());
-        Console.WriteLine($"\nOrder 1 Total Cost: ${order1.CalculateTotalCost():F2}\n");
+        Console.WriteLine($"\nOrder 1 Total Cost: ${order1.TotalCost():F2}\n");
 
         Console.WriteLine("Order 2 Packing Label:");
         Console.WriteLine(order2.GetPackingLabel());
         Console.WriteLine("\nOrder 2 Shipping Label:");
         Console.WriteLine(order2.GetShippingLabel());
-        Console.WriteLine($"\nOrder 2 Total Cost: ${order2.CalculateTotalCost():F2}");
+        Console.WriteLine($"\nOrder 2 Total Cost: ${order2.TotalCost():F2}");
     }
 }

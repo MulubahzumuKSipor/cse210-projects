@@ -16,12 +16,12 @@ class Address
         Country = country;
     }
 
-    public bool IsInUSA()
+    public bool IsIn()
     {
         return Country.Trim().ToLower() == "usa";
     }
 
-    public string FullAddress()
+    public string ClientsFullAddress()
     {
         return $"{Street}\n{City}, {State}\n{Country}";
     }

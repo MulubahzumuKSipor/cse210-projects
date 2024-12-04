@@ -3,27 +3,27 @@ using System.Collections.Generic;
 
 class Customer
 {
-    private string Name;
-    private Address Address;
+    private string UserName;
+    private Address ClientAddress;
 
-    public Customer(string name, Address address)
+    public Customer(string _userName, Address _userAddress)
     {
-        Name = name;
-        Address = address;
+        UserName = _userName;
+        ClientAddress = _userAddress;
     }
 
-    public bool LivesInUSA()
+    public bool LivesIn()
     {
-        return Address.IsInUSA();
+        return ClientAddress.IsIn();
     }
 
     public string GetName()
     {
-        return Name;
+        return UserName;
     }
 
     public string GetAddress()
     {
-        return Address.FullAddress();
+        return ClientAddress.ClientsFullAddress();
     }
 }
